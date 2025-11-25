@@ -14,4 +14,7 @@ def test_each_row_in_data_has_valid_label():
 
 # Test 3
 def test_data_has_no_missing_values():
+    assert not test_data.isnull().any().any()
+    assert not train_data.isnull().any().any()
+
 
