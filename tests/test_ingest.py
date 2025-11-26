@@ -1,5 +1,5 @@
 import pandas as pd
-from ingest import test_data, train_data, standardise_to_lower
+from ingest import test_data, train_data, standardise_to_lower, remove_special_characters
 
 # Test 1
 def test_train_and_test_data_is_read_in_as_dataframe():
@@ -25,4 +25,35 @@ def test_standardise_to_lower_converts_title_and_description_columns():
     assert lower_df['title'].tolist() == ['hello', 'bye']
     assert lower_df['description'].tolist() == ['okay', 'yes']
 
+# Test 5
+def test_remove_special_characters_converts_data_correctly():
+    data = {
+        'label': [1, 2, 3, 4],
+        'title': [
+            'Hello! @World#',
+            'Test$%^&*()Title',
+            'Multiple   spaces',
+            "It's a test-case"
+        ],
+        'description': [
+            'Breaking news: £100 prize!',
+            'Update™ on COVID-19',
+            '  Leading and trailing spaces  ',
+            'Email: test@example.com'
+        ]
+    }
+    test_df = pd.DataFrame(data)
+    cleaned_df = remove_special_characters(test_df)
+    assert cleaned_df['title'].tolist() == [
+        'Hello! World',
+        'TestTitle',
+        'Multiple spaces',
+        "It's a test-case"
+    ]
+    assert cleaned_df['description'].tolist() == [
+        'Breaking news: 100 prize!',
+        'Update on COVID-19',
+        'Leading and trailing spaces',
+        'Email: testexample.com'
+    ]
 
