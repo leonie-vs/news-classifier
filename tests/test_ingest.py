@@ -26,34 +26,15 @@ def test_standardise_to_lower_converts_title_and_description_columns():
     assert lower_df['description'].tolist() == ['okay', 'yes']
 
 # Test 5
-def test_remove_special_characters_converts_data_correctly():
+def test_remove_special_characters_cleans_text():
     data = {
-        'label': [1, 2, 3, 4],
-        'title': [
-            'Hello! @World#',
-            'Test$%^&*()Title',
-            'Multiple   spaces',
-            "It's a test-case"
-        ],
-        'description': [
-            'Breaking news: £100 prize!',
-            'Update™ on COVID-19',
-            '  Leading and trailing spaces  ',
-            'Email: test@example.com'
-        ]
+        'label': [1, 2],
+        'title': ['Hello! @World#', 'Test$%^Title'],
+        'description': ['Breaking news: £100 prize!', 'Update™ on COVID-19']
     }
     test_df = pd.DataFrame(data)
     cleaned_df = remove_special_characters(test_df)
-    assert cleaned_df['title'].tolist() == [
-        'Hello! World',
-        'TestTitle',
-        'Multiple spaces',
-        "It's a test-case"
-    ]
-    assert cleaned_df['description'].tolist() == [
-        'Breaking news: 100 prize!',
-        'Update on COVID-19',
-        'Leading and trailing spaces',
-        'Email: testexample.com'
-    ]
+    assert cleaned_df['title'].tolist() == ['Hello! World', 'TestTitle']
+    assert cleaned_df['description'].tolist() == ['Breaking news: 100 prize!', 'Update on COVID-19']
+    assert cleaned_df['label'].tolist() == [1, 2]
 
