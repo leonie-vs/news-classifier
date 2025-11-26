@@ -19,14 +19,7 @@ def test_remove_special_characters_cleans_titles_and_descriptions():
     assert result.loc[1,'description'] == 'Update on COVID-19'
     assert result['label'].nunique() == 4
 
-# Test 2
-# def test_each_row_in_data_has_valid_label():
-#     valid_labels = {1, 2, 3, 4}
-#     assert data_df["label"].isin(valid_labels).all()
 
-# # Test 3
-# def test_data_has_no_missing_values():
-#     assert not data_df.isnull().any().any()
 
 
 
