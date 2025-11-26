@@ -1,5 +1,5 @@
 import pandas as pd
-from ingest import test_data, train_data, standardise_to_lower, remove_special_characters
+from ingest import test_data, train_data, remove_special_characters
 
 # Test 1
 def test_train_and_test_data_is_read_in_as_dataframe():
@@ -22,7 +22,7 @@ def test_remove_special_characters_cleans_text():
     data = {
         'label': [1, 2],
         'title': ['Hello! @World#', 'Test$%^Title'],
-        'description': ['Breaking news: £100 prize!', 'Update™ on COVID-19']
+        'description': ['Breaking \"news\": £100 prize!', 'Update™ on COVID-19']
     }
     test_df = pd.DataFrame(data)
     cleaned_df = remove_special_characters(test_df)
