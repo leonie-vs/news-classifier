@@ -2,6 +2,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
 
 class TrainModel:
 
@@ -39,9 +40,18 @@ class TrainModel:
     def train(self):
         if self.X_train is None or self.y_train is None:
             raise ValueError("Split data before training model.")
-    
         self.model.fit(self.X_train, self.y_train)
         return self.model
+    
+    def evaluate(self):
+        if self.X_test is None or self.y_test is None:
+            raise ValueError("Split data before evaluating model.")
+        
+        predictions = self.model.predict(self.X_test)
+        accuracy = accuracy_score(self.y_test, predictions)
+        report = classification_report(self.y_test, predictions)
+        
+        return accuracy, report
 
 
     
