@@ -52,6 +52,9 @@ class TrainModel:
         report = classification_report(self.y_test, predictions)
         
         return accuracy, report
+    
+    def predict(self, text):
+        return self.model.predict([text])
 
 
     
