@@ -8,6 +8,17 @@ def test_load_data_returns_jsonl_as_dataframe():
     assert type(result) == pd.DataFrame
     assert result.shape == (20,3)
 
+# # Test 2
+def test_remove_special_characters_cleans_titles_and_descriptions():
+    ingest = IngestData('./tests/test_data.jsonl', './tests/test_clean_data.jsonl')
+    cleaned = ingest.load_data()
+    result = ingest.remove_special_characters(cleaned)
+    assert result.loc[0,'title'] == 'Hello! World'
+    assert result.loc[1,'title'] == 'TestTitle'
+    assert result.loc[0,'description'] == 'Breaking news: 100 prize!'
+    assert result.loc[1,'description'] == 'Update on COVID-19'
+    assert result['label'].nunique() == 4
+
 # Test 2
 # def test_each_row_in_data_has_valid_label():
 #     valid_labels = {1, 2, 3, 4}
@@ -17,16 +28,5 @@ def test_load_data_returns_jsonl_as_dataframe():
 # def test_data_has_no_missing_values():
 #     assert not data_df.isnull().any().any()
 
-# # Test 4
-# def test_remove_special_characters_cleans_text():
-#     data = {
-#         'label': [1, 2],
-#         'title': ['Hello! @World#', 'Test$%^Title'],
-#         'description': ['Breaking news: £100 prize!', 'Update™ on COVID-19']
-#     }
-#     test_df = pd.DataFrame(data)
-#     cleaned_df = remove_special_characters(test_df)
-#     assert cleaned_df['title'].tolist() == ['Hello! World', 'TestTitle']
-#     assert cleaned_df['description'].tolist() == ['Breaking news: 100 prize!', 'Update on COVID-19']
-#     assert cleaned_df['label'].tolist() == [1, 2]
+
 
