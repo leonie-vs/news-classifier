@@ -3,6 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
+import pickle
 
 class TrainModel:
 
@@ -55,6 +56,17 @@ class TrainModel:
     
     def predict(self, text):
         return self.model.predict([text])
+    
+     # save trained model
+    def save_model(self):
+        with open('news_model.pkl', 'wb') as f:
+            pickle.dump(self.model, f)
+    
+    # load trained model
+    def load_model(self):
+        with open('news_model.pkl', 'rb') as f:
+            model = pickle.load(f)
+        return model
 
 
     
