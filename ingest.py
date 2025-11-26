@@ -33,6 +33,9 @@ class IngestData:
         data_cleaned = self.remove_special_characters(df) # call cleaning function
         self.save_data(data_cleaned) # save cleaned data in output file
         print("Data cleaned and saved")
+        return data_cleaned
+    
+   
 
 
 
