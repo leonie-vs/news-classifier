@@ -38,7 +38,7 @@ class TrainModel:
     
     def train(self):
         if self.X_train is None or self.y_train is None:
-            raise ValueError("Data not split yet. Call split_data() first.")
+            raise ValueError("Split data before training model.")
     
         self.model.fit(self.X_train, self.y_train)
         return self.model
