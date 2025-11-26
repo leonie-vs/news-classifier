@@ -24,19 +24,32 @@ Labels:
 - Create an instance of IngestData (defined in **ingest.py**). To do this, you need to pass in a string of the raw data file path, and a string of the file path pointing to where the data should be saved after preprocessing.
     - E.g. **ingest = IngestData('input_file_path', 'output_file_path')**.
 
-- To load, clean, and save the data, use the **preprocess_pipeline()** method.
+- To load, clean, and save the data, use the **preprocess_pipeline()** method. It returns the cleaned data as a pandas dataframe.
 - This method uses..
     - .. the **load_data()** method, which reads in the input data as a pandas dataframe.
     - .. the **remove_special_characters(df)** method, which standardises the strings in the columns 'title' and 'description' by removing extra spaces and any special characters that aren't a-z, A-Z, or basic punctuation (.,!?\':"-).
-    - .. the **save_data(df)** method, which saves the dataframe to a jsonl file which was defined as output_path when instantiating IngestData. 
+    - .. the **save_data(df)** method, which saves the dataframe to the jsonl file that was defined as output_path when instantiating IngestData. 
 
 
 3. Train the Model
 - To train the model on the preprocessed data, import the TrainModel class from **train_model.py** in **main.py**. 
 
-- Then, use the **reduce_rows(df, n=50,000)** method to get a balanced sample (equal amount of objects for each label) of the cleaned data, where **df** should be the cleaned dataset from the previous step, and **n** is the overall number of rows you want, defaulting to 50,000. 
+- Instantiate a **trainer = TrainModel()**
 
-- For this project, I suggest using the default sample size of n=50,000, which will reduce the data to 12,5000 rows per label. To ensure consistent random sampling, set a variable RANDOM_STATE_SEED to 42 before reducing the data. 
+- Use the **reduce_data(df, n=12,500)** method to get a balanced sample (equal amount of objects for each label) of the cleaned data, where **df** should be the cleaned df from the previous step, and **n** is the number of rows per label you want, defaulting to 25,500 (i.e. n_total=50,000). To ensure consistent random sampling, a constant class variable RANDOM_STATE_SEED is set to 42 in the TrainModel class. 
+- For this project, I suggest using the default sample size of n=50,000, which will reduce the data to 12,5000 rows per label. 
+
+- Split the data into test and train data with the train() method. 
+
+- Train the model using the train() method. 
+
+- Evaluate the model using the evaluate() method, which returns an accuracy score and a classification report showing precision, recall, and f1-score for each label. 
+
+- Predict a news headline that isn't in the train or test dataset by calling predict(headline).
+
+- Save the trained model as **news_model.pkl** with the save_model() method. 
+
+- Load the model with the load_model() method. 
 
 
 
