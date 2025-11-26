@@ -8,7 +8,7 @@ def test_load_data_returns_jsonl_as_dataframe():
     assert type(result) == pd.DataFrame
     assert result.shape == (20,3)
 
-# # Test 2
+# Test 2
 def test_remove_special_characters_cleans_titles_and_descriptions():
     ingest = IngestData('./tests/test_data.jsonl', './tests/test_clean_data.jsonl')
     cleaned = ingest.load_data()
@@ -18,6 +18,8 @@ def test_remove_special_characters_cleans_titles_and_descriptions():
     assert result.loc[0,'description'] == 'Breaking news: 100 prize!'
     assert result.loc[1,'description'] == 'Update on COVID-19'
     assert result['label'].nunique() == 4
+
+
 
 
 
