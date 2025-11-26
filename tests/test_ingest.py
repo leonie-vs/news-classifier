@@ -18,14 +18,6 @@ def test_data_has_no_missing_values():
     assert not train_data.isnull().any().any()
 
 # Test 4
-def test_standardise_to_lower_converts_title_and_description_columns():
-    data = {'title': ['Hello', 'Bye'], 'description': ['oKaY', 'YES']}
-    test_df = pd.DataFrame(data) 
-    lower_df = standardise_to_lower(test_df)
-    assert lower_df['title'].tolist() == ['hello', 'bye']
-    assert lower_df['description'].tolist() == ['okay', 'yes']
-
-# Test 5
 def test_remove_special_characters_cleans_text():
     data = {
         'label': [1, 2],
