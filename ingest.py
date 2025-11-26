@@ -1,16 +1,16 @@
 import pandas as pd
-import re
+
+# define file path 
+path_data = "data/train.jsonl"
 
 # load data
-test_data = pd.read_json(path_or_buf="data/test.jsonl", lines=True)
-train_data = pd.read_json(path_or_buf="data/train.jsonl", lines=True)
+data_df = pd.read_json(path_or_buf=path_data, lines=True)
 
-# clean data
-# remove any characters that aren't a-z or basic punctuation 
+# clean data function
 def remove_special_characters(df):
     
     data = df.copy()
-    
+    # remove any characters that aren't a-z or basic punctuation 
     data['title'] = data['title'].str.replace(r'[^a-zA-Z0-9\s.,!?\':"-]', '', regex=True)
     data['description'] = data['description'].str.replace(r'[^a-zA-Z0-9\s.,!?\':"-]', '', regex=True)
 
@@ -19,10 +19,9 @@ def remove_special_characters(df):
     
     return data
 
-# call cleaning function 
-test_cleaned = remove_special_characters(test_data)
-train_cleaned = remove_special_characters(train_data)
+# preprocess and save data
+if __name__ == "__main__":
+    data_cleaned = remove_special_characters(data_df) # call cleaning function
+    data_cleaned.to_json('data/data_cleaned.jsonl', orient='records', lines=True) # write cleaned data to new jsonl file
+    print("Data cleaned and saved")
 
-# write cleaned data to new jsonl files
-test_cleaned.to_json('data/test_cleaned.jsonl', orient='records', lines=True)
-train_cleaned.to_json('data/train_cleaned.jsonl', orient='records', lines=True)
