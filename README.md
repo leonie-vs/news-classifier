@@ -32,7 +32,7 @@ Labels:
 
 
 3. Train the Model
-- To train the model on the preprocessed data, import the TrainModel class from **train_model.py** in **main.py**. 
+- To train the model on the preprocessed data, import the TrainModel class from **train_lr_model.py** in **main.py**. 
 
 - Instantiate a **trainer = TrainModel()**
 
@@ -47,7 +47,7 @@ Labels:
 
 - Predict a news headline that isn't in the train or test dataset by calling predict(headline).
 
-- Save the trained model as **news_model.pkl** with the save_model() method. 
+- Save the trained model as **lr_news_model.pkl** with the save_model() method. 
 
 - Load the model with the load_model() method. 
 
