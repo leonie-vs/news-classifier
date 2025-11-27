@@ -12,7 +12,7 @@ class TrainModel:
     def __init__(self):
         self.model = Pipeline([
             ('tfidf', TfidfVectorizer(max_features=5000, ngram_range=(1, 2))),
-            ('classifier', LogisticRegression(max_iter=1000, random_state=42))
+            ('classifier', LogisticRegression(verbose=1, max_iter=100, random_state=self.RANDOM_STATE_SEED))
             ])
         self.X_train = None
         self.X_test = None
@@ -40,13 +40,13 @@ class TrainModel:
     
     def train(self):
         if self.X_train is None or self.y_train is None:
-            raise ValueError("Split data before training model.")
+            raise ValueError("Split data before training model")
         self.model.fit(self.X_train, self.y_train)
         return self.model
     
     def evaluate(self):
         if self.X_test is None or self.y_test is None:
-            raise ValueError("Split data before evaluating model.")
+            raise ValueError("Split data before evaluating model")
         
         predictions = self.model.predict(self.X_test)
         accuracy = accuracy_score(self.y_test, predictions)
