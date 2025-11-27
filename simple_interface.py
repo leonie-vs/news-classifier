@@ -1,5 +1,5 @@
 from news_classifier import NewsClassifier
-from ingest import IngestData 
+import re
 
 def simple_interface(path):
     
@@ -10,7 +10,12 @@ def simple_interface(path):
     while True:
 
         headline = input("> Enter a headline: ")
-        label = news_clf.classify_news(headline)
+
+        no_special_chars = re.sub(r'[^a-zA-Z0-9\s.,!?\':"-]', '', headline)
+        cleaned = " ".join(no_special_chars.split())
+        print(cleaned)
+
+        label = news_clf.classify_news(cleaned)
 
         category = news_clf.get_category(label)
 
@@ -19,3 +24,4 @@ def simple_interface(path):
             break
 
         print(f"[Result] {category}\n")
+
