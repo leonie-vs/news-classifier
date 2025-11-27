@@ -13,6 +13,12 @@ class NewsClassifier:
     def classify_news(self, headline):
         pred = self.model.predict([headline])
         return pred[0]
+    
+    def get_category(label):
+        label_mapping = {1: 'World', 2: 'Sports', 3: 'Business', 4: 'Sci/Tech'}
+        category = label_mapping[label]
+        return category
+    
 
         
         
