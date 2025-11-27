@@ -47,5 +47,5 @@ prediction4 = trainer.predict(headline4)
 print(f"Prediction: {prediction4[0]}")
 
 # save the model
-#trainer.save_model()
+trainer.save_model()
 
