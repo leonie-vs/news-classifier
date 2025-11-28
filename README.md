@@ -49,7 +49,19 @@ Labels:
 
 - Save the trained model as **lr_news_model.pkl** with the save_model() method. 
 
-- Load the model with the load_model() method. 
+- Load the model with the load_model() method.
 
+
+4. Implementing the News Classifier
+- In **main.py**, import the function **simple_interface** from simple_interface.py, and call it passing in a string of the path pointing to the model as a string.
+- The simple_interface function first creates an instance of the NewsClassifier class held in **news_classifier.py** to load the trained logistic regression model, using the passed in file path. 
+
+- The NewsClassifier class has two methods:
+    - classify_news(headline) - returns the predicted label for a string headline
+    - get_category(label) - returns the category (World, Sports, Business, or Sci/Tech) for a label (1, 2, 3, or 4)
+
+- Then, the function prompts the user to enter a headline, which it cleans by removing any extra white spaces or special characters, before using the **classify_news** method to predict its label. The **get_category** then converts this label to a category, which is printed to the console. 
+
+- The user can exit the interface by typing 'quit'. 
 
 
