@@ -45,15 +45,14 @@ Labels:
 
 - Evaluate the model using the evaluate() method, which returns an accuracy score and a classification report showing precision, recall, and f1-score for each label. 
 
-- Predict a news headline that isn't in the train or test dataset by calling predict(headline).
+- Predict a few example news headlines that are not in the train or test dataset by calling predict(headline), verifying that the model predicts the expected label. 
 
 - Save the trained model as **lr_news_model.pkl** with the save_model() method. 
 
-- Load the model with the load_model() method.
-
 
 4. Implementing the News Classifier
-- In **main.py**, import the function **simple_interface** from simple_interface.py, and call it passing in a string of the path pointing to the model as a string.
+- In **chatbot_interface.py**, import the function **simple_interface** from simple_interface.py, and call it passing in a string of the path pointing to the model as a string.
+
 - The simple_interface function first creates an instance of the NewsClassifier class held in **news_classifier.py** to load the trained logistic regression model, using the passed in file path. 
 
 - The NewsClassifier class has two methods:
